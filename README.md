@@ -1,4 +1,4 @@
-# SoftKinetic DepthSense 325 (DS325) Standalone Python Driver
+# SoftKinetic DepthSense 325 (DS325) Standalone Python Driver (No SDK!)
 
 Standalone Linux Python scripts for controlling the **SoftKinetic DepthSense 325 (DS325)** Time-of-Flight (ToF) depth camera (`2113:0145`) directly via Linux UVC Extension Unit (`UVCIOC_CTRL_QUERY`) ioctls, without requiring the proprietary DepthSense SDK or compiled OpenNI2 C++ binaries.
 
@@ -70,3 +70,11 @@ python3 stream.py
    ```bash
    python3 deactivate.py
    ```
+
+### Standalone Live Viewer (MacOS)
+libuvc needs to be installed.
+```bash
+python3 stream_mac.py
+```
+* Opens **DS325 Depth** (color-mapped `320x240`), **DS325 IR** (`320x240`), and **DS325 RGB** (`1280x720`).
+* Press **`ESC` or `q`** to close the windows and automatically deactivate the IR emitter.
