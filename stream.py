@@ -28,10 +28,12 @@ import numpy as np
 
 print("What is the device path for the depth camera?")
 DEPTH_DEV = input() #"/dev/video4"
+if not DEPTH_DEV.startswith("/"):
+	DEPTH_DEV = "/dev/video" + DEPTH_DEV
 print("What is the device path for the colour camera?")
 RGB_DEV = input() #"/dev/video2"
-
-
+if not RGB_DEV.startswith("/"):
+	RGB_DEV = "/dev/video" + RGB_DEV
 
 UVC_SET_CUR = 0x01
 UVC_GET_CUR = 0x81
@@ -207,13 +209,15 @@ def unpack_ds325_frame(raw_yuyv: np.ndarray) -> tuple[np.ndarray, np.ndarray]:
 
 def main() -> None:
     cap_depth = cv2.VideoCapture(DEPTH_DEV, cv2.CAP_V4L2)
+    cap_depth.set(cv2.CAP_PROP_FOURCC, cv2.VideoWriter_fourcc(*"YUYV"))
     cap_depth.set(cv2.CAP_PROP_FRAME_WIDTH, 640)
     cap_depth.set(cv2.CAP_PROP_FRAME_HEIGHT, 240)
-    cap_depth.set(cv2.CAP_PROP_FPS, 30)
+    cap_depth.set(cv2.CAP_PROP_FPS, 60)
     cap_depth.set(cv2.CAP_PROP_CONVERT_RGB, 0)
 
     cap_rgb = cv2.VideoCapture(RGB_DEV, cv2.CAP_V4L2) if RGB_DEV else None
     if cap_rgb:
+        cap_rgb.set(cv2.CAP_PROP_FOURCC, cv2.VideoWriter_fourcc(*"MJPG"))
         cap_rgb.set(cv2.CAP_PROP_FRAME_WIDTH, 1280)
         cap_rgb.set(cv2.CAP_PROP_FRAME_HEIGHT, 720)
         cap_rgb.set(cv2.CAP_PROP_FPS, 30)
