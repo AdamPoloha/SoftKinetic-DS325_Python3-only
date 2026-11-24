@@ -28,9 +28,9 @@ Modern Linux kernels expose four `/dev/video*` nodes for the DS325 (two capture 
 
 | Device Node (Example) | Interface Role | Best Video Output Mode | What VLC Shows |
 | :--- | :--- | :--- | :--- |
-| **`/dev/video2`** | RGB Color Capture | **`MJPG` (Motion-JPEG, compressed)**<br>• `1280x720` @ `30 fps` | Normal live color webcam video. |
+| **`/dev/video2`** | RGB Color Capture | **`MJPG` (Motion-JPEG)**<br>• `1280x720` @ `30 fps` | Normal live color webcam video. |
 | **`/dev/video3`** | RGB Metadata Node | *(Metadata only — no video frames)* | Nothing (fails to open / no video stream). |
-| **`/dev/video4`** | ToF Depth + IR Capture | **`YUYV` (YUYV 4:2:2)**<br>• `640x240` @ `60.000 fps` | **Solid bright green** until `activate.py` turns on the IR emitter (because zeroed bytes in a `YUYV` buffer decode to `Y=0, U=0, V=0` green). Once activated, VLC displays a live green/magenta ToF phase pattern. |
+| **`/dev/video4`** | ToF Depth + IR Capture | **`YUYV` (YUYV 4:2:2)**<br>• `640x240` @ `60 fps` | **Solid bright green** until `activate.py` turns on the IR emitter (because zeroed bytes in a `YUYV` buffer decode to `Y=0, U=0, V=0` green). Once activated, VLC displays a live green/magenta ToF phase pattern. |
 | **`/dev/video5`** | Depth Metadata Node | *(Metadata only — no video frames)* | Nothing (fails to open / no video stream). |
 
 ---
